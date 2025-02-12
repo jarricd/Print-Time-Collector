@@ -1,0 +1,7 @@
+- name: ollama_chat/qwen2.5-coder:32b
+  extra_params:
+    num_ctx: 8196
+
+- name: ollama_chat/qwen2.5-coder:14b
+  extra_params:
+    num_ctx: 8196
