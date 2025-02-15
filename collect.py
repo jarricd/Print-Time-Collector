@@ -2,6 +2,12 @@ import sqlalchemy
 import requests
 import logging
 import sys
+from dotenv import load_dotenv
+import os
+
+load_dotenv()
+
+API_KEY = os.getenv("API_KEY")
 
 from model.config import DATABASE_FILE
 from model.tables import DataEntry
@@ -18,7 +24,7 @@ if __name__ == "__main__":
     engine = create_engine(f"sqlite:///{DATABASE_FILE}", echo=True)
     DataEntry.metadata.create_all(engine)
     try:
-        job_req = requests.get("http://192.168.0.67:5000/api/job", headers={"X-Api-Key": "75EB947ECFF141D3A85B91F8ACC8B2D0"})
+        job_req = requests.get("http://192.168.0.67:5000/api/job", headers={"X-Api-Key": API_KEY})
         job_req.raise_for_status()
     except Exception as e:
         logging.error(f"Exception occured to GET a job status failed. Exc msg {e}")
